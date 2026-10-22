@@ -1,4 +1,5 @@
 using System.Numerics;
+using Assert = Smart.Assertions.Assertions.Assert;
 
 namespace Smart.Assertions.Tests;
 
