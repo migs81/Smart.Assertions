@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="src/Smart.Assert/Smart.Assert.csproj" />
-  <Project Path="tests/Smart.Assert.Tests/Smart.Assert.Tests.csproj" />
-</Solution>
