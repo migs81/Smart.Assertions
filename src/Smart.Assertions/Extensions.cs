@@ -22,9 +22,27 @@ public static class Extensions
 
     #region string
 
+    public static string Empty(this string value)
+    {
+        Assert.Empty(value);
+        return value;
+    }
+    
+    public static string NotEmpty(this string value)
+    {
+        Assert.NotEmpty(value);
+        return value;
+    }
+    
     public static string ShouldEqual(this string actual, string expected, StringComparison comparison)
     {
         Assert.Equal(expected, actual, comparison);
+        return actual;
+    }
+    
+    public static string ShouldNotEqual(this string actual, string expected, StringComparison comparison)
+    {
+        Assert.NotEqual(expected, actual, comparison);
         return actual;
     }
     
@@ -32,9 +50,27 @@ public static class Extensions
     
     #region generic
 
+    public static T ShouldBeNull<T>(this T value)
+    {
+        Assert.Null(value);
+        return value;
+    }
+    
+    public static T ShouldNotBeNull<T>(this T value)
+    {
+        Assert.NotNull(value);
+        return value;
+    }
+    
     public static T ShouldEqual<T>(this T actual, T expected)
     {
         Assert.Equal(expected, actual);
+        return actual;
+    }
+    
+    public static T ShouldNotEqual<T>(this T actual, T expected)
+    {
+        Assert.NotEqual(expected, actual);
         return actual;
     }
     
@@ -64,6 +100,40 @@ public static class Extensions
     {
         Assert.GreaterThanOrEqual(expected, actual);
         return actual;
+    }
+    
+    public static T ShouldBeBetween<T>(this T value, T low, T high) where T : INumber<T>
+    {
+        Assert.Between(value, low, high);
+        return value;
+    }
+    
+    #endregion
+    
+    #region collections
+
+    public static ICollection<T> ShouldBeEmpty<T>(this ICollection<T> collection)
+    {
+        Assert.Empty(collection);
+        return collection;
+    }
+    
+    public static ICollection<T> ShouldNotBeEmpty<T>(this ICollection<T> collection)
+    {
+        Assert.NotEmpty(collection);
+        return collection;
+    }
+    
+    public static ICollection<T> ShouldContain<T>(this ICollection<T> collection, T item) where T : IEquatable<T>
+    {
+        Assert.Contains(collection, item);
+        return collection;
+    }
+    
+    public static ICollection<T> ShouldNotContain<T>(this ICollection<T> collection, T item) where T : IEquatable<T>
+    {
+        Assert.DoesNotContain(collection, item);
+        return collection;
     }
     
     #endregion
