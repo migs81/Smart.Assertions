@@ -10,8 +10,11 @@ public class AssertTest
     [InlineData("TEST", "TEST")]
     public void Equal_T_WhenEqual_DoesNotThrow(string actual, string expected)
     {
+        // act
+        var result = Record.Exception(() => Assert.Equal(expected, actual));
+            
         // assert
-        Assert.Equal(expected, actual);
+        Xunit.Assert.Null(result);
     }
     
     [Theory]

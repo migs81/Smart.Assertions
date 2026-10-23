@@ -12,8 +12,11 @@ public class AssertNumbersTests
     [InlineData(999, 1000)]
     public void LessThan_Integer_WhenLess_DoesNotThrow(int actual, int expected)
     {
+        // act
+        var result = Record.Exception(() => Assert.LessThan(expected, actual));
+            
         // assert
-        Assert.LessThan(expected, actual);
+        Xunit.Assert.Null(result);
     }
     
     [Theory]

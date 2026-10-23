@@ -10,8 +10,11 @@ public class AssertStringsTests
     [InlineData("TEST", "test", StringComparison.OrdinalIgnoreCase)]
     public void Equal_String_WhenEqual_DoesNotThrow(string actual, string expected, StringComparison comparison)
     {
+        // act
+        var result = Record.Exception(() => Assert.Equal(expected, actual, comparison));
+            
         // assert
-        Assert.Equal(expected, actual, comparison);
+        Xunit.Assert.Null(result);
     }
     
     [Theory]

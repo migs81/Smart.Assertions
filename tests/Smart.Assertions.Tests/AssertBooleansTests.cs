@@ -12,8 +12,11 @@ public class AssertBooleansTests
         // arrange
         const bool input = true;
 
+        // act
+        var result = Record.Exception(() => Assert.True(input));
+            
         // assert
-        Assert.True(input);
+        Xunit.Assert.Null(result);
     }
     
     [Fact]
@@ -36,8 +39,11 @@ public class AssertBooleansTests
         // arrange
         const bool input = false;
 
+        // act
+        var result = Record.Exception(() => Assert.False(input));
+            
         // assert
-        Assert.False(input);
+        Xunit.Assert.Null(result);
     }
     
     [Fact]

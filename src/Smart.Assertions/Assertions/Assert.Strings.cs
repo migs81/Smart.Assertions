@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace Smart.Assertions.Assertions;
 
 public static partial class Assert
