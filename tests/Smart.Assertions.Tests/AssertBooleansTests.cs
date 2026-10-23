@@ -20,7 +20,7 @@ public class AssertBooleansTests
     }
     
     [Fact]
-    public void True_WhenConditionIsFalse_ThrowsAssertionException()
+    public void True_WhenConditionIsFalse_Throws()
     {
         // arrange
         const bool input = false;
@@ -47,7 +47,7 @@ public class AssertBooleansTests
     }
     
     [Fact]
-    public void False_WhenConditionIsTrue_ThrowsAssertionException()
+    public void False_WhenConditionIsTrue_Throws()
     {
         // arrange
         const bool input = true;

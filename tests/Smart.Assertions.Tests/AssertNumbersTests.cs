@@ -25,7 +25,7 @@ public class AssertNumbersTests
     [InlineData(0, 0)]
     [InlineData(1, 0)]
     [InlineData(100, 99)]
-    public void LessThan_Integer_WhenNotLess_ThrowsAssertionException(int actual, int expected)
+    public void LessThan_Integer_WhenNotLess_Throws(int actual, int expected)
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.LessThan(expected, actual));
@@ -52,7 +52,7 @@ public class AssertNumbersTests
     [InlineData(0, -1)]
     [InlineData(1, 0)]
     [InlineData(100, 99)]
-    public void LessThanOrEqual_Integer_WhenNotLessOrEqual_ThrowsAssertionException(int actual, int expected)
+    public void LessThanOrEqual_Integer_WhenNotLessOrEqual_Throws(int actual, int expected)
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.LessThanOrEqual(expected, actual));
@@ -79,7 +79,7 @@ public class AssertNumbersTests
     [InlineData(0, 0)]
     [InlineData(0, 1)]
     [InlineData(99, 100)]
-    public void GreaterThan_Integer_WhenNotGreater_ThrowsAssertionException(int actual, int expected)
+    public void GreaterThan_Integer_WhenNotGreater_Throws(int actual, int expected)
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.GreaterThan(expected, actual));
@@ -106,7 +106,7 @@ public class AssertNumbersTests
     [InlineData(0, 1)]
     [InlineData(99, 100)]
     [InlineData(999, 1000)]
-    public void GreaterThanOrEqual_Integer_WhenNotGreaterOrEqual_ThrowsAssertionException(int actual, int expected)
+    public void GreaterThanOrEqual_Integer_WhenNotGreaterOrEqual_Throws(int actual, int expected)
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.GreaterThanOrEqual(expected, actual));
@@ -133,7 +133,7 @@ public class AssertNumbersTests
     [InlineData(0, 1, 3)]
     [InlineData(1, 0, 0)]
     [InlineData(10, 11, 5)]
-    public void Between_Integer_WhenNotGreaterOrEqual_ThrowsAssertionException(int value, int min, int max)
+    public void Between_Integer_WhenNotGreaterOrEqual_Throws(int value, int min, int max)
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.Between(value, min , max));

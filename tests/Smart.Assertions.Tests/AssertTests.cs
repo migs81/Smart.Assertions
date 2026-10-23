@@ -21,7 +21,7 @@ public class AssertTest
     [InlineData("", "x")]
     [InlineData("Test", "test")]
     [InlineData("TEST", "test")]
-    public void Equal_T_WhenNotEqual_ThrowsAssertionException(string actual, string expected)
+    public void Equal_T_WhenNotEqual_Throws(string actual, string expected)
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.Equal(expected, actual));
