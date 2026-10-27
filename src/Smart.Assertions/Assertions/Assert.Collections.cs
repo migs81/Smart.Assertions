@@ -1,57 +1,116 @@
-using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace Smart.Assertions.Assertions;
 
 public static partial class Assert
 {
-    public static void Empty<T>(ICollection<T> collection)
+    #region Empty, NotEmpty
+
+    // For internal use only, to avoid duplicate code.
+    internal static bool IsEmptyInternal<T>(ICollection<T> collection) => collection?.Count == 0;
+
+    public static void Empty<T>(ICollection<T> collection, 
+        [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
-        if (collection?.Count != 0)
-            throw new AssertionException("Assert.Empty() failed.");
+        if (!IsEmptyInternal(collection))
+            throw new AssertionException($"{nameof(Assert)}.{nameof(Empty)}({expression}) failed.",
+                "Expected: empty collection",
+                $"Actual: collection contains {collection.Count} element(s)");
+    }
+
+    public static void NotEmpty<T>(ICollection<T> collection, 
+        [CallerArgumentExpression(nameof(collection))] string? expression = null)
+    {
+        if (IsEmptyInternal(collection))
+            throw new AssertionException($"{nameof(Assert)}.{nameof(NotEmpty)}({expression}) failed.",
+                "Expected: not an empty collection",
+                $"Actual: an empty collection");
+    }
+
+    #endregion
+
+    #region Contains, DoesNotContain
+
+    // For internal use only, to avoid duplicate code.
+    internal static bool ContainsInternal<T>(ICollection<T> collection, T item) => 
+        collection?.Contains(item) == true;
+
+    public static void Contains<T>(ICollection<T> collection, T item, 
+        [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
+        [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
+    {
+        if (!ContainsInternal(collection, item))
+            throw new AssertionException($"{nameof(Assert)}.{nameof(Contains)}({collectionExpression}, {itemExpression}) failed.",
+                $"Expected: {item}",
+                $"Actual: does not contain {item}");
     }
     
-    public static void NotEmpty<T>(ICollection<T> collection)
+    public static void DoesNotContain<T>(ICollection<T> collection, T item, 
+        [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
+        [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
     {
-        if (collection?.Count == 0)
-            throw new AssertionException("Assert.NotEmpty() failed.");
+        if (ContainsInternal(collection, item))
+            throw new AssertionException($"{nameof(Assert)}.{nameof(Contains)}({collectionExpression}, {itemExpression}) failed.",
+                $"Expected: does not contain {item}",
+                $"Actual: contains {item}");
     }
-    
-    public static void Contains<T>(ICollection<T> collection, T item) where T : IEquatable<T>
-    {
-        if (collection?.Contains(item) != true)
-            throw new AssertionException("Assert.Contains() failed.");
-    }
-    
-    public static void DoesNotContain<T>(ICollection<T> collection, T item) where T : IEquatable<T>
-    {
-        if (collection?.Contains(item) == true)
-            throw new AssertionException("Assert.DoesNotContain() failed.");
-    }
+
+    #endregion    
 }
 
 public static partial class AssertExtensions
 {
-    public static ICollection<T> ShouldBeEmpty<T>(this ICollection<T> collection)
-    {
-        Assert.Empty(collection);
-        return collection;
-    }
+    #region Empty, NotEmpty
     
-    public static ICollection<T> ShouldNotBeEmpty<T>(this ICollection<T> collection)
+    public static ICollection<T> ShouldBeEmpty<T>(this ICollection<T> collection,
+        [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
-        Assert.NotEmpty(collection);
+        if (!Assert.IsEmptyInternal(collection))
+            throw new AssertionException($"{expression}.{nameof(ShouldBeEmpty)}() failed.",
+                "Expected: empty collection",
+                $"Actual: collection contains {collection.Count} element(s)");
+        
         return collection;
     }
-    
-    public static ICollection<T> ShouldContain<T>(this ICollection<T> collection, T item) where T : IEquatable<T>
+
+    public static ICollection<T> ShouldNotBeEmpty<T>(this ICollection<T> collection,
+        [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
-        Assert.Contains(collection, item);
+        if (Assert.IsEmptyInternal(collection))
+            throw new AssertionException($"{expression}.{nameof(ShouldNotBeEmpty)}() failed.",
+                "Expected: not an empty collection",
+                $"Actual: an empty collection");
+        
         return collection;
     }
-    
-    public static ICollection<T> ShouldNotContain<T>(this ICollection<T> collection, T item) where T : IEquatable<T>
+
+    #endregion
+        
+    #region Contains, DoesNotContain
+
+    public static ICollection<T> ShouldContain<T>(this ICollection<T> collection, T item,
+        [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
+        [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
     {
-        Assert.DoesNotContain(collection, item);
+        if (Assert.ContainsInternal(collection, item))
+            throw new AssertionException($"{collectionExpression}.{nameof(ShouldContain)}({itemExpression}) failed.",
+                $"Expected: {item}",
+                $"Actual: does not contain {item}");
+
         return collection;
     }
+
+    public static ICollection<T> ShouldNotContain<T>(this ICollection<T> collection, T item,
+        [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
+        [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
+    {
+        if (!Assert.ContainsInternal(collection, item))
+            throw new AssertionException($"{collectionExpression}.{nameof(ShouldNotContain)}({itemExpression}) failed.",
+                "Expected: not an empty collection",
+                $"Actual: an empty collection");
+
+        return collection;
+    }
+
+    #endregion
 }
