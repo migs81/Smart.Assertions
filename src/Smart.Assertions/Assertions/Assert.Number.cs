@@ -12,7 +12,7 @@ public static partial class Assert
     {
         if (actual >= expected)
             throw new AssertionException($"{nameof(Assert)}.{nameof(LessThan)}({expectedExpression}, {actualExpression}) failed.",
-                $"Expected: {expected}",
+                $"Expected: a number less than {expected}",
                 $"Actual: {actual}");
     }
 
@@ -23,7 +23,7 @@ public static partial class Assert
     {
         if (actual > expected)
             throw new AssertionException($"{nameof(Assert)}.{nameof(LessThanOrEqual)}({expectedExpression}, {actualExpression}) failed.",
-                $"Expected: {expected}",
+                $"Expected: a number less or equal than {expected}",
                 $"Actual: {actual}");
     }
 
@@ -34,7 +34,7 @@ public static partial class Assert
     {
         if (actual <= expected)
             throw new AssertionException($"{nameof(Assert)}.{nameof(GreaterThan)}({expectedExpression}, {actualExpression}) failed.",
-                $"Expected: {expected}",
+                $"Expected: a number greater than {expected}",
                 $"Actual: {actual}");
     }
 
@@ -45,7 +45,7 @@ public static partial class Assert
     {
         if (actual < expected)
             throw new AssertionException($"{nameof(Assert)}.{nameof(GreaterThanOrEqual)}({expectedExpression}, {actualExpression}) failed.",
-                $"Expected: {expected}",
+                $"Expected: a number greater or equal than {expected}",
                 $"Actual: {actual}");
     }
 
@@ -57,7 +57,7 @@ public static partial class Assert
     {
         if (value < min || value > max)
             throw new AssertionException($"{nameof(Assert)}.{nameof(Between)}({valueExpression}, {minExpression}, {maxExpression}) failed.",
-                $"Expected: value between {min} and {max}",
+                $"Expected: a number between {min} and {max}",
                 $"Actual: {value}");
     }
 }
@@ -70,8 +70,8 @@ public static partial class AssertExtensions
         where T : INumber<T>
     {
         if (actual >= expected)
-            throw new AssertionException($"{expectedExpression}.{nameof(ShouldBeLessThan)}({actualExpression}) failed.",
-                $"Expected: {expected}",
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldBeLessThan)}({expectedExpression}) failed.",
+                $"Expected: a number less than {expected}",
                 $"Actual: {actual}");
 
         return actual;
@@ -83,8 +83,8 @@ public static partial class AssertExtensions
         where T : INumber<T>
     {
         if (actual > expected)
-            throw new AssertionException($"{expectedExpression}.{nameof(ShouldBeLessThanOrEqual)}({actualExpression}) failed.",
-                $"Expected: {expected}",
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldBeLessThanOrEqual)}({expectedExpression}) failed.",
+                $"Expected: a number less or equal than {expected}",
                 $"Actual: {actual}");
         
         return actual;
@@ -96,8 +96,8 @@ public static partial class AssertExtensions
         where T : INumber<T>
     {
         if (actual <= expected)
-            throw new AssertionException($"{expectedExpression}.{nameof(ShouldBeGreaterThan)}({actualExpression}) failed.",
-                $"Expected: {expected}",
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldBeGreaterThan)}({expectedExpression}) failed.",
+                $"Expected: a number greater than {expected}",
                 $"Actual: {actual}");
         
         return actual;
@@ -109,8 +109,8 @@ public static partial class AssertExtensions
         where T : INumber<T>
     {
         if (actual < expected)
-            throw new AssertionException($"{expectedExpression}.{nameof(ShouldBeGreaterThanOrEqual)}({actualExpression}) failed.",
-                $"Expected: {expected}",
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldBeGreaterThanOrEqual)}({expectedExpression}) failed.",
+                $"Expected: a number greater or equal than {expected}",
                 $"Actual: {actual}");
         
         return actual;
@@ -124,7 +124,7 @@ public static partial class AssertExtensions
     {
         if (value < min || value > max)
             throw new AssertionException($"{valueExpression}.{nameof(ShouldBeBetween)}({minExpression}, {maxExpression}) failed.",
-                $"Expected: value between {min} and {max}",
+                $"Expected: a number between {min} and {max}",
                 $"Actual: {value}");
         
         return value;
