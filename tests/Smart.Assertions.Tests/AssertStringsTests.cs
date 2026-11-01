@@ -1,3 +1,4 @@
+using Smart.Assertions.Assertions;
 using Assert = Smart.Assertions.Assertions.Assert;
 
 namespace Smart.Assertions.Tests;
@@ -14,7 +15,7 @@ public class AssertStringsTests
     {
         // act
         var result = Record.Exception(() => Assert.Equal(expected, actual, comparison));
-            
+        
         // assert
         Xunit.Assert.Null(result);
     }
@@ -108,6 +109,114 @@ public class AssertStringsTests
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.Contains(value, actual, comparison));
+    }
+    
+    #endregion
+    
+    #region ShouldEqual
+
+    [Theory]
+    [InlineData("", "", StringComparison.Ordinal)]
+    [InlineData("test", "test", StringComparison.Ordinal)]
+    [InlineData("TEST", "test", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldEqual_WhenEqual_DoesNotThrow(string actual, string expected, StringComparison comparison)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldEqual(expected, comparison));
+        
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData("", "x", StringComparison.Ordinal)]
+    [InlineData("Test", "test", StringComparison.Ordinal)]
+    [InlineData("TEST", "test2", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldEqual_WhenNotEqual_Throws(string actual, string expected, StringComparison comparison)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldEqual(expected, comparison));
+    }
+    
+    #endregion
+
+    #region ShouldStartWith
+    
+    [Theory]
+    [InlineData("Test", "Te", StringComparison.Ordinal)]
+    [InlineData("Test", "Tes", StringComparison.Ordinal)]
+    [InlineData("TEST", "TEST", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldStartWith_WhenMatching_DoesNotThrow(string actual, string value, StringComparison comparison)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldStartWith(value, comparison));
+            
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData("Test", "est", StringComparison.Ordinal)]
+    [InlineData("Test", "TES", StringComparison.Ordinal)]
+    [InlineData("TEST", "ST", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldStartWith_WhenNotMatching_Throws(string actual, string value, StringComparison comparison)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldStartWith(value, comparison));
+    }
+    
+    #endregion
+    
+    #region ShouldEndWith
+    
+    [Theory]
+    [InlineData("Test", "st", StringComparison.Ordinal)]
+    [InlineData("Test", "Test", StringComparison.Ordinal)]
+    [InlineData("TEST", "st", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldEndWith_WhenMatching_DoesNotThrow(string actual, string value, StringComparison comparison)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldEndWith(value, comparison));
+            
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData("Test", "EST", StringComparison.Ordinal)]
+    [InlineData("Test", "Tes", StringComparison.Ordinal)]
+    [InlineData("TEST", "STE", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldEndWith_WhenNotMatching_Throws(string actual, string value, StringComparison comparison)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldEndWith(value, comparison));
+    }
+    
+    #endregion
+    
+    #region ShouldContain
+    
+    [Theory]
+    [InlineData("Test", "es", StringComparison.Ordinal)]
+    [InlineData("Test", "Te", StringComparison.Ordinal)]
+    [InlineData("TEST", "es", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldContain_WhenMatching_DoesNotThrow(string actual, string value, StringComparison comparison)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldContain(value, comparison));
+            
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData("Test", "tes", StringComparison.Ordinal)]
+    [InlineData("Test", "TE", StringComparison.Ordinal)]
+    [InlineData("TEST", "STE", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldContain_WhenNotMatching_Throws(string actual, string value, StringComparison comparison)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldContain(value, comparison));
     }
     
     #endregion
