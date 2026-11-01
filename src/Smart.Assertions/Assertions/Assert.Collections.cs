@@ -6,6 +6,13 @@ public static partial class Assert
 {
     #region Empty, NotEmpty
 
+    /// <summary>
+    /// Asserts that the collection is empty.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void Empty<T>(ICollection<T> collection, 
         [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
@@ -15,6 +22,13 @@ public static partial class Assert
                 $"Actual: collection contains {collection.Count} element(s)");
     }
 
+    /// <summary>
+    /// Asserts that the collection is not empty.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void NotEmpty<T>(ICollection<T> collection, 
         [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
@@ -28,6 +42,15 @@ public static partial class Assert
 
     #region Contains, DoesNotContain
 
+    /// <summary>
+    /// Asserts that the collection contains the specified item.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="item"></param>
+    /// <param name="collectionExpression"></param>
+    /// <param name="itemExpression"></param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void Contains<T>(ICollection<T> collection, T item, 
         [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
         [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
@@ -38,6 +61,15 @@ public static partial class Assert
                 $"Actual: does not contain {item}");
     }
     
+    /// <summary>
+    /// Asserts that the collection does not contain the specified item.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="item"></param>
+    /// <param name="collectionExpression"></param>
+    /// <param name="itemExpression"></param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void DoesNotContain<T>(ICollection<T> collection, T item, 
         [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
         [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
@@ -55,6 +87,14 @@ public static partial class AssertExtensions
 {
     #region Empty, NotEmpty
     
+    /// <summary>
+    /// Asserts that the collection is empty and returns the collection.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked collection.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static ICollection<T> ShouldBeEmpty<T>(this ICollection<T> collection,
         [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
@@ -66,6 +106,14 @@ public static partial class AssertExtensions
         return collection;
     }
 
+    /// <summary>
+    /// Asserts that the collection is not empty and returns the collection.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked collection.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static ICollection<T> ShouldNotBeEmpty<T>(this ICollection<T> collection,
         [CallerArgumentExpression(nameof(collection))] string? expression = null)
     {
@@ -81,6 +129,16 @@ public static partial class AssertExtensions
         
     #region Contains, DoesNotContain
 
+    /// <summary>
+    /// Asserts that the collection contains the specified item and returns the collection.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="item"></param>
+    /// <param name="collectionExpression"></param>
+    /// <param name="itemExpression"></param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked collection.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static ICollection<T> ShouldContain<T>(this ICollection<T> collection, T item,
         [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
         [CallerArgumentExpression(nameof(item))] string? itemExpression = null)
@@ -93,6 +151,16 @@ public static partial class AssertExtensions
         return collection;
     }
 
+    /// <summary>
+    /// Asserts that the collection does not contain the specified item and returns the collection.
+    /// </summary>
+    /// <param name="collection"></param>
+    /// <param name="item"></param>
+    /// <param name="collectionExpression"></param>
+    /// <param name="itemExpression"></param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked collection.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static ICollection<T> ShouldNotContain<T>(this ICollection<T> collection, T item,
         [CallerArgumentExpression(nameof(collection))] string? collectionExpression = null,
         [CallerArgumentExpression(nameof(item))] string? itemExpression = null)

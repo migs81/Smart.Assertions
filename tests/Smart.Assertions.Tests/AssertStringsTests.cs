@@ -220,4 +220,31 @@ public class AssertStringsTests
     }
     
     #endregion
+    
+    #region ShouldNotContain
+    
+    [Theory]
+    [InlineData("Test", "tes", StringComparison.Ordinal)]
+    [InlineData("Test", "TE", StringComparison.Ordinal)]
+    [InlineData("TEST", "STE", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldNotContain_WhenNotMatching_DoesNotThrow(string actual, string value, StringComparison comparison)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldNotContain(value, comparison));
+            
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData("Test", "es", StringComparison.Ordinal)]
+    [InlineData("Test", "Te", StringComparison.Ordinal)]
+    [InlineData("TEST", "es", StringComparison.OrdinalIgnoreCase)]
+    public void ShouldNotContain_WhenMatching_Throws(string actual, string value, StringComparison comparison)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldNotContain(value, comparison));
+    }
+    
+    #endregion
 }

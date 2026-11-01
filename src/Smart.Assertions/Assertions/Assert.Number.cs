@@ -5,6 +5,17 @@ namespace Smart.Assertions.Assertions;
 
 public static partial class Assert
 {
+    #region LessThan, LessThanOrEqual
+    
+    /// <summary>
+    /// Asserts that the actual value is less than the expected value.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void LessThan<T>(T expected, T actual, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -16,6 +27,15 @@ public static partial class Assert
                 $"Actual: {actual}");
     }
 
+    /// <summary>
+    /// Asserts that the actual value is less than or equal the expected value.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void LessThanOrEqual<T>(T expected, T actual, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -27,6 +47,19 @@ public static partial class Assert
                 $"Actual: {actual}");
     }
 
+    #endregion
+    
+    #region GreaterThan, GreaterThanOrEqual
+    
+    /// <summary>
+    /// Asserts that the actual value is greater than the expected value.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void GreaterThan<T>(T expected, T actual, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -38,6 +71,15 @@ public static partial class Assert
                 $"Actual: {actual}");
     }
 
+    /// <summary>
+    /// Asserts that the actual value is greater than or equal the expected value.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void GreaterThanOrEqual<T>(T expected, T actual, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -49,6 +91,21 @@ public static partial class Assert
                 $"Actual: {actual}");
     }
 
+    #endregion
+    
+    #region Between
+    
+    /// <summary>
+    /// Asserts that the value is within the specified range, inclusive.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="minExpression"></param>
+    /// <param name="maxExpression"></param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <exception cref="AssertionException"></exception>
     public static void Between<T>(T value, T min, T max, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null,
         [CallerArgumentExpression(nameof(min))] string? minExpression = null,
@@ -60,10 +117,24 @@ public static partial class Assert
                 $"Expected: a number between {min} and {max}",
                 $"Actual: {value}");
     }
+    
+    #endregion
 }
 
 public static partial class AssertExtensions
 {
+    #region ShouldBeLessThan, ShouldBeLessThanOrEqual
+    
+    /// <summary>
+    /// Asserts that the actual value is less than the expected value and returns the value.
+    /// </summary>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expected"></param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static T ShouldBeLessThan<T>(this T actual, T expected, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -77,6 +148,16 @@ public static partial class AssertExtensions
         return actual;
     }
     
+    /// <summary>
+    /// Asserts that the actual value is less than or equal the expected value and returns the value.
+    /// </summary>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expected"></param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static T ShouldBeLessThanOrEqual<T>(this T actual, T expected, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -90,6 +171,20 @@ public static partial class AssertExtensions
         return actual;
     }
     
+    #endregion
+    
+    #region ShouldBeGreaterThan, ShouldBeGreaterThanOrEqual
+    
+    /// <summary>
+    /// Asserts that the actual value is greater than the expected value and returns the value.
+    /// </summary>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expected"></param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static T ShouldBeGreaterThan<T>(this T actual, T expected, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -103,6 +198,16 @@ public static partial class AssertExtensions
         return actual;
     }
     
+    /// <summary>
+    /// Asserts that the actual value is greater than or equal the expected value and returns the value.
+    /// </summary>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expected"></param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static T ShouldBeGreaterThanOrEqual<T>(this T actual, T expected, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -116,6 +221,22 @@ public static partial class AssertExtensions
         return actual;
     }
     
+    #endregion
+    
+    #region ShouldBeBetween
+    
+    /// <summary>
+    /// Asserts that the value is within the specified range, inclusive and returns the value.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="minExpression"></param>
+    /// <param name="maxExpression"></param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static T ShouldBeBetween<T>(this T value, T min, T max, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null,
         [CallerArgumentExpression(nameof(min))] string? minExpression = null,
@@ -129,4 +250,6 @@ public static partial class AssertExtensions
         
         return value;
     }
+    
+    #endregion
 }
