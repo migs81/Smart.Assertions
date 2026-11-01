@@ -6,6 +6,12 @@ public static partial class Assert
 {
     #region Empty, NotEmpty
 
+    /// <summary>
+    /// Asserts that the string is empty.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void Empty(string value, 
         [CallerArgumentExpression(nameof(value))] string? expression = null)
     {
@@ -15,6 +21,12 @@ public static partial class Assert
                 $"Actual: {value}");
     }
     
+    /// <summary>
+    /// Asserts that the string is not empty.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void NotEmpty(string value, 
         [CallerArgumentExpression(nameof(value))] string? expression = null)
     {
@@ -28,6 +40,15 @@ public static partial class Assert
 
     #region Equal, NotEqual
 
+    /// <summary>
+    /// Asserts that the string equals the specified value.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void Equal(string expected, string actual, StringComparison comparison, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -38,6 +59,15 @@ public static partial class Assert
                 $"Actual: \"{actual}\"");
     }
     
+    /// <summary>
+    /// Asserts that the string does not equal the specified value.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void NotEqual(string expected, string actual, StringComparison comparison, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -52,6 +82,15 @@ public static partial class Assert
 
     #region Starts-, EndsWith
 
+    /// <summary>
+    /// Asserts that the string starts with the specified value.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void StartsWith(string value, string actual, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -62,6 +101,15 @@ public static partial class Assert
                 $"Actual: \"{actual}\"");
     }
     
+    /// <summary>
+    /// Asserts that the string ends with the specified value.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void EndsWith(string value, string actual, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -76,6 +124,15 @@ public static partial class Assert
 
     #region Contains, DoesNotContain
     
+    /// <summary>
+    /// Asserts that the actual value contains the expected value.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <exception cref="AssertionException"></exception>
     public static void Contains(string value, string actual, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -86,6 +143,25 @@ public static partial class Assert
                 $"Actual: \"{actual}\"");
     }
     
+    /// <summary>
+    /// Asserts that the actual value does not contain the specified value.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <exception cref="AssertionException"></exception>
+    public static void DoesNotContain(string value, string actual, StringComparison comparison = StringComparison.Ordinal, 
+        [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
+        [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
+    {
+        if (actual.Contains(value, comparison))
+            throw new AssertionException($"{nameof(Assert)}.{nameof(DoesNotContain)}({valueExpression}, {actualExpression}) failed.",
+                $"Expected: string does not contain \"{value}\"",
+                $"Actual: \"{actual}\"");
+    }
+    
     #endregion
 }
 
@@ -93,6 +169,13 @@ public static partial class AssertExtensions
 {
     #region ShouldBeEmpty, ShouldNotBeEmpty
     
+    /// <summary>
+    /// Asserts that the string is empty and returns the string.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldBeEmpty(this string value,
         [CallerArgumentExpression(nameof(value))] string? expression = null)
     {
@@ -104,6 +187,13 @@ public static partial class AssertExtensions
         return value;
     }
     
+    /// <summary>
+    /// Asserts that the string is not empty and returns the string.
+    /// </summary>
+    /// <param name="value">The value to check.</param>
+    /// <param name="expression">The expression representing the value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldNotBeEmpty(this string value, 
         [CallerArgumentExpression(nameof(value))] string? expression = null)
     {
@@ -119,6 +209,16 @@ public static partial class AssertExtensions
     
     #region ShouldEqual, ShouldNotEqual
     
+    /// <summary>
+    /// Asserts that the string equals the specified value and returns the string.
+    /// </summary>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="expected"></param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldEqual(this string actual, string expected, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null)
@@ -131,6 +231,16 @@ public static partial class AssertExtensions
         return actual;
     }
     
+    /// <summary>
+    /// Asserts that the string does not equal the specified value and returns the string.
+    /// </summary>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="expected"></param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldNotEqual(this string actual, string expected, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null, 
         [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null)
@@ -147,6 +257,16 @@ public static partial class AssertExtensions
     
     #region ShouldStartWith, ShouldEndWith
     
+    /// <summary>
+    /// Asserts that the string starts with the specified value and returns the string.
+    /// </summary>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="value">The value to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldStartWith(this string actual, string value, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -159,6 +279,16 @@ public static partial class AssertExtensions
         return actual;
     }
     
+    /// <summary>
+    /// Asserts that the string ends with the specified value and returns the string.
+    /// </summary>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="value">The value to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldEndWith(this string actual, string value, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -175,6 +305,16 @@ public static partial class AssertExtensions
     
     #region ShouldContain, ShouldNotContain
     
+    /// <summary>
+    /// Asserts that the string contains the specified value and returns the string.
+    /// </summary>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="value">The value to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
     public static string ShouldContain(this string actual, string value, StringComparison comparison = StringComparison.Ordinal, 
         [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
         [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
@@ -182,6 +322,28 @@ public static partial class AssertExtensions
         if (!actual.Contains(value, comparison))
             throw new AssertionException($"{actualExpression}.{nameof(ShouldContain)}({valueExpression}, {comparison}) failed.",
                 $"Expected: string contains \"{value}\"",
+                $"Actual: {actual}");
+        
+        return actual;
+    }
+    
+    /// <summary>
+    /// Asserts that the string does not contain the specified value and returns the string.
+    /// </summary>
+    /// <param name="actual">The actual string to check.</param>
+    /// <param name="value">The value to check.</param>
+    /// <param name="comparison">The string comparison mode.</param>
+    /// <param name="valueExpression">The expression representing the value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <returns>The checked string.</returns>
+    /// <exception cref="AssertionException"></exception>
+    public static string ShouldNotContain(this string actual, string value, StringComparison comparison = StringComparison.Ordinal, 
+        [CallerArgumentExpression(nameof(value))] string? valueExpression = null, 
+        [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
+    {
+        if (actual.Contains(value, comparison))
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldNotContain)}({valueExpression}, {comparison}) failed.",
+                $"Expected: string does not contain \"{value}\"",
                 $"Actual: {actual}");
         
         return actual;
