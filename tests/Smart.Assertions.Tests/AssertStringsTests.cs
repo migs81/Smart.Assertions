@@ -5,6 +5,60 @@ namespace Smart.Assertions.Tests;
 
 public class AssertStringsTests
 {
+    #region Empty
+
+    [Fact]
+    public void Empty_WhenEmpty_DoesNotThrow()
+    {
+        // arrange
+        const string input = "";
+        
+        // act
+        var result = Record.Exception(() => Assert.Empty(input));
+        
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Fact]
+    public void Empty_WhenNotEmpty_Throws()
+    {
+        // arrange
+        const string input = "test";
+
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => Assert.Empty(input));
+    }
+    
+    #endregion
+    
+    #region NotEmpty
+
+    [Fact]
+    public void NotEmpty_WhenNotEmpty_DoesNotThrow()
+    {
+        // arrange
+        var input = "test";
+        
+        // act
+        var result = Record.Exception(() => Assert.NotEmpty(input));
+        
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Fact]
+    public void NotEmpty_WhenEmpty_Throws()
+    {
+        // arrange
+        var input = "";
+        
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => Assert.NotEmpty(input));
+    }
+    
+    #endregion
+    
     #region Equal
 
     [Theory]
@@ -109,6 +163,60 @@ public class AssertStringsTests
     {
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.Contains(value, actual, comparison));
+    }
+    
+    #endregion
+    
+    #region ShouldBeEmpty
+
+    [Fact]
+    public void ShouldBeEmpty_WhenEmpty_DoesNotThrow()
+    {
+        // arrange
+        var input = "";
+        
+        // act
+        var result = Record.Exception(() => input.ShouldBeEmpty());
+        
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Fact]
+    public void ShouldBeEmpty_WhenNotEmpty_Throws()
+    {
+        // arrange
+        var input = "test";
+        
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => input.ShouldBeEmpty());
+    }
+    
+    #endregion
+    
+    #region ShouldNotBeEmpty
+
+    [Fact]
+    public void ShouldNotBeEmpty_WhenNotEmpty_DoesNotThrow()
+    {
+        // arrange
+        const string input = "test";
+        
+        // act
+        var result = Record.Exception(() => input.ShouldNotBeEmpty());
+        
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Fact]
+    public void ShouldNotBeEmpty_WhenEmpty_Throws()
+    {
+        // arrange
+        const string input = "";
+
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => input.ShouldNotBeEmpty());
     }
     
     #endregion
