@@ -173,7 +173,7 @@ public class AssertStringsTests
     public void ShouldBeEmpty_WhenEmpty_DoesNotThrow()
     {
         // arrange
-        var input = "";
+        const string input = "";
         
         // act
         var result = Record.Exception(() => input.ShouldBeEmpty());
