@@ -64,7 +64,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the expected and actual values are not equal.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual value to check.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
@@ -133,7 +133,7 @@ public static partial class AssertExtensions
     /// Asserts that the expected and actual values are equal and return the actual value.
     /// </summary>
     /// <param name="actual">The actual value to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <typeparam name="T">The type of the value.</typeparam>
@@ -155,7 +155,7 @@ public static partial class AssertExtensions
     /// Asserts that the expected and actual values are not equal and returns the actual value.
     /// </summary>
     /// <param name="actual">The actual value to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <typeparam name="T">The type of the value.</typeparam>

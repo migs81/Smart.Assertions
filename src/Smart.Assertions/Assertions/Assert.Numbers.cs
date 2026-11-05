@@ -10,7 +10,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the actual value is less than the expected value.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual value to check.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
@@ -30,7 +30,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the actual value is less than or equal the expected value.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual value to check.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
@@ -54,7 +54,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the actual value is greater than the expected value.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual value to check.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
@@ -74,7 +74,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the actual value is greater than or equal the expected value.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual value to check.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
@@ -129,7 +129,7 @@ public static partial class AssertExtensions
     /// Asserts that the actual value is less than the expected value and returns the value.
     /// </summary>
     /// <param name="actual">The actual value to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <typeparam name="T">The type of the value.</typeparam>
@@ -152,7 +152,7 @@ public static partial class AssertExtensions
     /// Asserts that the actual value is less than or equal the expected value and returns the value.
     /// </summary>
     /// <param name="actual">The actual value to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <typeparam name="T">The type of the value.</typeparam>
@@ -179,7 +179,7 @@ public static partial class AssertExtensions
     /// Asserts that the actual value is greater than the expected value and returns the value.
     /// </summary>
     /// <param name="actual">The actual value to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <typeparam name="T">The type of the value.</typeparam>
@@ -202,7 +202,7 @@ public static partial class AssertExtensions
     /// Asserts that the actual value is greater than or equal the expected value and returns the value.
     /// </summary>
     /// <param name="actual">The actual value to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <typeparam name="T">The type of the value.</typeparam>

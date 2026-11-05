@@ -43,7 +43,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the string equals the specified value.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual string to check.</param>
     /// <param name="comparison">The string comparison mode.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
@@ -62,7 +62,7 @@ public static partial class Assert
     /// <summary>
     /// Asserts that the string does not equal the specified value.
     /// </summary>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="actual">The actual string to check.</param>
     /// <param name="comparison">The string comparison mode.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
@@ -213,7 +213,7 @@ public static partial class AssertExtensions
     /// Asserts that the string equals the specified value and returns the string.
     /// </summary>
     /// <param name="actual">The actual string to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="comparison">The string comparison mode.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
@@ -235,7 +235,7 @@ public static partial class AssertExtensions
     /// Asserts that the string does not equal the specified value and returns the string.
     /// </summary>
     /// <param name="actual">The actual string to check.</param>
-    /// <param name="expected"></param>
+    /// <param name="expected">The expected value.</param>
     /// <param name="comparison">The string comparison mode.</param>
     /// <param name="actualExpression">The expression representing the actual value.</param>
     /// <param name="expectedExpression">The expression representing the expected value.</param>
