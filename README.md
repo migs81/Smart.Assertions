@@ -32,6 +32,25 @@ value.ShouldNotBeNull()
 
 If an assertion fails, an `AssertionException` is thrown.
 
+## 🧪 TestCase
+
+`TestCase` provides a simple way to define and run a test using a fluent API.
+
+It separates the test into three steps:
+
+- **Create:** Define the input.
+- **Act:** Execute the action.
+- **Assert:** Check the result.
+
+### TestCase example
+
+```csharp
+TestCase.Create(5)
+    .Act(input => Calculator.Double(input))
+    .Assert(result => result.ShouldBe(10))
+    .Run();
+```
+
 ## ⚙️ Requirements
 
 - .NET 8.0 or later
