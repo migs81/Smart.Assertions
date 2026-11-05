@@ -47,7 +47,7 @@ It separates the test into three steps:
 ```csharp
 TestCase.Create(5)
     .Act(input => Calculator.Double(input))
-    .Assert(result => result.ShouldBe(10))
+    .Assert(result => result.ShouldBeLessThan(11))
     .Run();
 ```
 
