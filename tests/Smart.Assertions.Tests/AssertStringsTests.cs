@@ -51,8 +51,8 @@ public class AssertStringsTests
     public void NotEmpty_WhenEmpty_Throws()
     {
         // arrange
-        var input = "";
-        
+        const string input = "";
+
         // assert
         Xunit.Assert.Throws<AssertionException>(() => Assert.NotEmpty(input));
     }
