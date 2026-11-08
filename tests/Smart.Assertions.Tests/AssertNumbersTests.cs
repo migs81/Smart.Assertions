@@ -141,6 +141,60 @@ public class AssertNumbersTests
     
     #endregion
     
+    #region ShouldBe
+    
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(99, 99)]
+    [InlineData(999, 999)]
+    public void ShouldBe_Integer_WhenEqual_DoesNotThrow(int actual, int expected)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldBe(expected));
+            
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData(0, 1)]
+    [InlineData(1, -1)]
+    [InlineData(100, 99)]
+    public void ShouldBe_Integer_WhenNotEqual_Throws(int actual, int expected)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldBe(expected));
+    }
+    
+    #endregion
+    
+    #region ShouldNotBe
+    
+    [Theory]
+    [InlineData(0, 1)]
+    [InlineData(99, 100)]
+    [InlineData(999, -1)]
+    public void ShouldNotBe_Integer_WhenNotEqual_DoesNotThrow(int actual, int expected)
+    {
+        // act
+        var result = Record.Exception(() => actual.ShouldNotBe(expected));
+            
+        // assert
+        Xunit.Assert.Null(result);
+    }
+    
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1)]
+    [InlineData(100, 100)]
+    public void ShouldNotBe_Integer_WhenEqual_Throws(int actual, int expected)
+    {
+        // assert
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldNotBe(expected));
+    }
+    
+    #endregion
+
     #region ShouldBeLessThan
     
     [Theory]
