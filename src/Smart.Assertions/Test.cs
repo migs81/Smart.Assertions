@@ -1,6 +1,6 @@
 namespace Smart.Assertions;
 
-public static class TestCase
+public static class Test
 {
     /// <summary>
     /// Creates a new test case with the specified input.
@@ -8,10 +8,10 @@ public static class TestCase
     /// <param name="input">The input value for the test case.</param>
     /// <typeparam name="TInput">The type of the input value.</typeparam>
     /// <returns>A new test case.</returns>
-    public static ITestCase<TInput> Create<TInput>(TInput input) => new TestCase<TInput>(input);
+    public static ITest<TInput> Create<TInput>(TInput input) => new Test<TInput>(input);
 }
 
-internal sealed class TestCase<TInput>(TInput input) : ITestCase<TInput>
+internal sealed class Test<TInput>(TInput input) : ITest<TInput>
 {
     /// <summary>
     /// Defines the action to execute using the test case input.
@@ -20,12 +20,12 @@ internal sealed class TestCase<TInput>(TInput input) : ITestCase<TInput>
     /// <typeparam name="TResult">The type of the action result.</typeparam>
     /// <returns>A test case configured with the specified action.</returns>
     /// <exception cref="ArgumentNullException">The action is null.</exception>
-    public ITestCase<TInput, TResult> Act<TResult>(Func<TInput, TResult> action) => action is null
+    public ITest<TInput, TResult> Act<TResult>(Func<TInput, TResult> action) => action is null
         ? throw new ArgumentNullException(nameof(action))
-        : new TestCase<TInput, TResult>(input, action);
+        : new Test<TInput, TResult>(input, action);
 }
 
-internal sealed class TestCase<TInput, TResult>(TInput input, Func<TInput, TResult> action) : ITestCase<TInput, TResult>
+internal sealed class Test<TInput, TResult>(TInput input, Func<TInput, TResult> action) : ITest<TInput, TResult>
 {
     #region fields
 
@@ -41,7 +41,7 @@ internal sealed class TestCase<TInput, TResult>(TInput input, Func<TInput, TResu
     /// <param name="assertion">The assertion to execute.</param>
     /// <returns>The current test case.</returns>
     /// <exception cref="ArgumentNullException">The assertion is null.</exception>
-    public ITestCase<TInput, TResult> Assert(Action<TResult> assertion)
+    public ITest<TInput, TResult> Assert(Action<TResult> assertion)
     {
         _assertion = assertion ?? throw new ArgumentNullException(nameof(assertion));
         return this;
