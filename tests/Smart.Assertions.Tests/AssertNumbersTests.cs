@@ -217,7 +217,7 @@ public class AssertNumbersTests
     public void ShouldBeLessThan_Integer_WhenNotLess_Throws(int actual, int expected)
     {
         // assert
-        Xunit.Assert.Throws<AssertionException>(() => Assert.LessThan(expected, actual));
+        Xunit.Assert.Throws<AssertionException>(() => actual.ShouldBeLessThan(expected));
     }
     
     #endregion
