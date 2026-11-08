@@ -123,6 +123,56 @@ public static partial class Assert
 
 public static partial class AssertExtensions
 {
+    #region ShouldBe, ShouldNotBe
+    
+    /// <summary>
+    /// Asserts that the actual value equals the expected value and returns the actual value.
+    /// </summary>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expected">The expected value.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
+    public static T ShouldBe<T>(this T actual, T expected, 
+        [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
+        [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
+        where T : INumber<T>
+    {
+        if (actual != expected)
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldBe)}({expectedExpression}) failed.",
+                $"Expected: {expected}",
+                $"Actual: {actual}");
+
+        return actual;
+    }
+    
+    /// <summary>
+    /// Asserts that the actual value does not equal the expected value and returns the actual value.
+    /// </summary>
+    /// <param name="actual">The actual value to check.</param>
+    /// <param name="expected">The expected value.</param>
+    /// <param name="expectedExpression">The expression representing the expected value.</param>
+    /// <param name="actualExpression">The expression representing the actual value.</param>
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The checked value.</returns>
+    /// <exception cref="AssertionException"></exception>
+    public static T ShouldNotBe<T>(this T actual, T expected, 
+        [CallerArgumentExpression(nameof(expected))] string? expectedExpression = null,
+        [CallerArgumentExpression(nameof(actual))] string? actualExpression = null)
+        where T : INumber<T>
+    {
+        if (actual == expected)
+            throw new AssertionException($"{actualExpression}.{nameof(ShouldNotBe)}({expectedExpression}) failed.",
+                $"Expected: {expected}",
+                $"Actual: {actual}");
+        
+        return actual;
+    }
+    
+    #endregion
+    
     #region ShouldBeLessThan, ShouldBeLessThanOrEqual
     
     /// <summary>
